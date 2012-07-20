@@ -1,0 +1,121 @@
+<html lang="de">
+<!--
+ * Copyright 2012 Thomas Greiner
+ * thomas@greinr.com
+ *
+ * The contents of this file are subject to the Artistic License 2.0.
+ * The full text can be found in the LICENSE.txt file and at
+ * http://www.opensource.org/licenses/artistic-license-2.0
+-->
+<head>
+	<script type="text/javascript" src="_locales/de.js"></script>
+	<script type="text/javascript" src="_locales/en.js"></script>
+	<script type="text/javascript" src="getstarted.js"></script>
+</head>
+<body>
+
+<button onclick="about_getstarted.contact_developer()">contact developer</button>
+<button onclick="about_getstarted.show_examples()">show examples</button>
+
+<script type="text/javascript">
+function isDefined(e) {
+	if(typeof(e) == "undefined") {
+		throw new Error("element is undefined");
+	}
+}
+function isUndefined(e) {
+	if(typeof(e) != "undefined") {
+		throw new Error("element is not undefined");
+	}
+}
+
+function equals(attr, val) {
+	if(attr != val) {
+		throw new Error("'"+attr+"' does not equal expected '"+val+"'");
+	}
+}
+
+try {
+	_getstarted.set_locale("en");
+	_getstarted.hide_help_at_start();
+
+	// add
+	var e1 = add.and_create_new_element_to_page_that_is("b");
+	isDefined(e1);
+
+	var e2 = document.createElement("i");
+	e2.className = "c1";
+	e2.innerHTML = "test2";
+	add.existing_element_to_page(e2);
+	equals(e2.parentNode, document.body);
+
+	// change
+	change.content_of.element(e1, "test1");
+	equals(e1.innerHTML, "test1");
+	change.class_of_element(e1, "c1");
+	equals(e1.className, "c1");
+	change.id_of_element(e1, "i1");
+	equals(e1.getAttribute("id"), "i1");
+	change.name_of_element(e1, "n1");
+	equals(e1.getAttribute("name"), "n1");
+	change.visibility_of_element_to.hidden(e1);
+	equals(e1.style.display, "none");
+	change.visibility_of_element_to.visible(e1);
+	equals(e1.style.display, "inline");
+	change.visibility_of_element_to.the_opposite(e1);
+	equals(e1.style.display, "none");
+
+	// find_out
+	var text = "abc";
+	equals(find_out.if_text.starts_with(text, "a"), true);
+	equals(find_out.if_text.starts_with(text, "A"), false);
+	equals(find_out.if_text.contains(text, "b"), true);
+	equals(find_out.if_text.contains(text, "B"), false);
+	equals(find_out.if_text.ends_with(text, "c"), true);
+	equals(find_out.if_text.ends_with(text, "C"), false);
+
+	find_out.more_about_element(e1);
+
+	// get
+	var et1 = get.element_that.is("b");
+	isDefined(et1);
+	var et2 = get.element_that.has_id("i1");
+	isDefined(et2);
+	var et3 = get.element_that.has_class("c1");
+	isDefined(et3);
+	var et4 = get.element_that.has_name("n1");
+	isDefined(et4);
+	var es1 = get.elements_that.have_class("c1");
+	equals(es1.length, 2);
+	var es2 = get.elements_that.are("button");
+	equals(es2.length, 2);
+	var es3 = get.elements_that.have_name("n1");
+	equals(es3.length, 1);
+	var page = get.entire_page();
+	isDefined(page);
+
+	// get
+	change.content_of.each_element(es1, "test3");
+	for(var i=0, len=es1.length; i<len; i++) {
+		equals(es1[i].innerHTML, "test3");
+	}
+
+	// remove
+	var parent = e2.parentNode;
+	remove.element(e2);
+	equals(parent.getElementsByTagName("i").length, 0);
+
+	var pre = document.createElement("pre");
+	pre.style.color = "green";
+	pre.innerHTML = "tests successful!";
+	document.body.appendChild(pre);
+} catch(ex) {
+	var pre = document.createElement("pre");
+	pre.style.color = "red";
+	pre.innerHTML = ex.stack;
+	document.body.appendChild(pre);
+}
+</script>
+
+</body>
+</html>
