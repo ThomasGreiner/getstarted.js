@@ -15,6 +15,6 @@ This framework's main features are:
 3. insert script tags for all downloaded files in HTML page
        <script type="text/javascript" src="_locales/en.js"></script>
        <script type="text/javascript" src="getstarted.js"></script>
-4. define locale in `<html lang="`**locale**`">` or programmatically with `_getstarted.set_locale(`**locale**`)`
+4. define locale in `<html lang="` **locale** `">` or programmatically with `_getstarted.set_locale(` **locale** `)`
 
 Feedback is very much appreciated!
